@@ -1,0 +1,15 @@
+{
+  "extends": ["tslint:latest", "tslint-config-prettier"],
+  "rules": {
+    "no-var-requires": false,
+    "no-submodule-imports": false,
+    "object-literal-sort-keys": false,
+    "no-implicit-dependencies": false,
+    "no-console": false,
+    "no-shadowed-variable": false,
+    "prefer-conditional-expression": false,
+    "interface-name": false
+  },
+  "include": ["src"],
+  "exclude": ["node_modules", "**/*.json"]
+}
