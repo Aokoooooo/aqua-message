@@ -20,7 +20,7 @@ export class Bus {
     }
     const listeners = this.subscription.get(type);
     listeners!.forEach(callback => {
-      callback();
+      callback(...args);
     });
   }
 
