@@ -13,11 +13,11 @@ export function useMessage<T extends Bus>(
 ): Subscriber<T>;
 export function useMessage<T extends Bus>(
   bus: T,
-  event: IUseMessage | IUseMessage[]
+  event?: IUseMessage | IUseMessage[]
 ): Subscriber<T>;
 export function useMessage<T extends Bus>(
   bus: T,
-  event: string | IUseMessage | IUseMessage[],
+  event?: string | IUseMessage | IUseMessage[],
   callback?: CallbackType
 ) {
   const subscriber = useMemo(() => {
@@ -25,7 +25,9 @@ export function useMessage<T extends Bus>(
   }, [bus]);
 
   useOnMount(() => {
-    if (typeof event === "string") {
+    if (typeof event === "undefined" || event === null) {
+      return;
+    } else if (typeof event === "string") {
       if (typeof callback !== "function") {
         return;
       }
@@ -44,7 +46,9 @@ export function useMessage<T extends Bus>(
   });
 
   useOnUnmount(() => {
-    if (typeof event === "string") {
+    if (typeof event === "undefined" || event === null) {
+      return;
+    } else if (typeof event === "string") {
       subscriber.off(event);
     } else if (Array.isArray(event)) {
       event.forEach(i => {
