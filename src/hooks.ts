@@ -6,15 +6,34 @@ export interface IUseMessage {
   [event: string]: CallbackType;
 }
 
+/**
+ * this `hooks` is used in `react functional component` to auto subscribe and unsubscribe the specific events
+ * in the  `mounted` and `willUnMount` lifecycle.
+ * @param bus
+ * @param event event type name
+ * @param callback
+ */
 export function useMessage<T extends Bus>(
   bus: T,
   event: string,
   callback: CallbackType
 ): Subscriber<T>;
+/**
+ * this `hooks` is used in `react functional component` to auto subscribe and unsubscribe the specific events
+ * in the  `mounted` and `willUnMount` lifecycle.
+ * @param bus
+ * @param event a function or a list of function which the function name will be set as the event type name.
+ */
 export function useMessage<T extends Bus>(
   bus: T,
   event?: IUseMessage | IUseMessage[]
 ): Subscriber<T>;
+/**
+ *
+ * @param bus
+ * @param event
+ * @param callback
+ */
 export function useMessage<T extends Bus>(
   bus: T,
   event?: string | IUseMessage | IUseMessage[],
