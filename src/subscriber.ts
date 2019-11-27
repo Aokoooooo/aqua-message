@@ -32,7 +32,7 @@ export class Subscriber<T extends Bus> {
   }
 
   /**
-   *  log off the specific listening
+   *  logout the specific listening
    * @param type event type
    */
   public off(type: string) {
