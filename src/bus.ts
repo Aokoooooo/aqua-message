@@ -4,12 +4,18 @@ import { CallbackType, Subscriber } from "./subscriber";
  * event bus
  */
 export class Bus {
+  /**
+   * map<type , map<token, callback>>
+   */
   private subscription: Map<string, Map<number, CallbackType>> = new Map();
 
+  /**
+   * subscriber's id
+   */
   private token = 0;
 
   /**
-   * when the `subscriber` `$emit()` some message,
+   * when the `subscriber` `emit()` some message,
    *  the `bus` will notify these to all the subscriber who listened this event.
    * @param type event type
    * @param args

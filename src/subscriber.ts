@@ -4,8 +4,14 @@ import { Bus } from "./bus";
  * event listener
  */
 export class Subscriber<T extends Bus> {
+  /**
+   * the publisher
+   */
   private readonly bus: T;
 
+  /**
+   * map<type, token>, the token is used by the bus to unsubscribe the callback
+   */
   private tokens = new Map<string, number>();
 
   constructor(bus: T) {
@@ -27,6 +33,9 @@ export class Subscriber<T extends Bus> {
    * @param callback
    */
   public on(type: string, callback: CallbackType) {
+    if (this.tokens.has(type)) {
+      this.off(type);
+    }
     const token = this.bus.on(type, callback);
     this.tokens.set(type, token);
   }
@@ -36,7 +45,7 @@ export class Subscriber<T extends Bus> {
    * @param type event type
    */
   public off(type: string) {
-    this.bus.off(type, this.tokens.get(type) || 0);
+    this.bus.off(type, this.tokens.get(type) || -1);
     this.tokens.delete(type);
   }
 
@@ -46,9 +55,12 @@ export class Subscriber<T extends Bus> {
    * @param callback
    */
   public once(type: string, callback: CallbackType) {
+    let isFirst = true;
     const onOnce = () => {
-      this.off(type);
-      callback();
+      if (isFirst) {
+        callback();
+        isFirst = false;
+      }
     };
     this.on(type, onOnce);
   }
