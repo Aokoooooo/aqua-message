@@ -45,7 +45,8 @@ export class Subscriber<T extends Bus> {
    * @param type event type
    */
   public off(type: string) {
-    this.bus.off(type, this.tokens.get(type) || -1);
+    const token = this.tokens.get(type);
+    this.bus.off(type, typeof token === "number" ? token : -1);
     this.tokens.delete(type);
   }
 
@@ -55,12 +56,9 @@ export class Subscriber<T extends Bus> {
    * @param callback
    */
   public once(type: string, callback: CallbackType) {
-    let isFirst = true;
-    const onOnce = () => {
-      if (isFirst) {
-        callback();
-        isFirst = false;
-      }
+    const onOnce: CallbackType = (...args) => {
+      this.off(type);
+      callback(...args);
     };
     this.on(type, onOnce);
   }

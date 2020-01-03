@@ -8,7 +8,7 @@ export interface IUseMessage {
 
 /**
  * this `hooks` is used in `react functional component` to auto subscribe and unsubscribe the specific events
- * in the  `mounted` and `willUnMount` lifecycle.
+ * on the  `mounted` and `willUnMount` lifecycle.
  * @param bus
  * @param event event type name
  * @param callback
@@ -26,7 +26,7 @@ export function useMessage<T extends Bus>(
  */
 export function useMessage<T extends Bus>(
   bus: T,
-  event?: IUseMessage | IUseMessage[]
+  event: IUseMessage | IUseMessage[]
 ): Subscriber<T>;
 /**
  *
@@ -36,7 +36,7 @@ export function useMessage<T extends Bus>(
  */
 export function useMessage<T extends Bus>(
   bus: T,
-  event?: string | IUseMessage | IUseMessage[],
+  event: string | IUseMessage | IUseMessage[],
   callback?: CallbackType
 ) {
   const subscriber = useMemo(() => {
@@ -44,11 +44,9 @@ export function useMessage<T extends Bus>(
   }, [bus]);
 
   useOnMount(() => {
-    if (typeof event === "undefined" || event === null) {
-      return;
-    } else if (typeof event === "string") {
+    if (typeof event === "string") {
       if (typeof callback !== "function") {
-        return;
+        throw new Error("need to pass a callback function as the thrid param");
       }
       subscriber.on(event, callback);
     } else if (Array.isArray(event)) {
@@ -65,9 +63,7 @@ export function useMessage<T extends Bus>(
   });
 
   useOnUnmount(() => {
-    if (typeof event === "undefined" || event === null) {
-      return;
-    } else if (typeof event === "string") {
+    if (typeof event === "string") {
       subscriber.off(event);
     } else if (Array.isArray(event)) {
       event.forEach(i => {

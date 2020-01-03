@@ -12,7 +12,7 @@ export class Bus {
   /**
    * subscriber's id
    */
-  private token = 0;
+  private token = -1;
 
   /**
    * when the `subscriber` `emit()` some message,
@@ -39,9 +39,10 @@ export class Bus {
     if (!this.subscription.has(type)) {
       this.subscription.set(type, new Map());
     }
+    this.token++;
     const listeners = this.subscription.get(type);
     listeners!.set(this.token, callback);
-    return this.token++;
+    return this.token;
   }
 
   /**
