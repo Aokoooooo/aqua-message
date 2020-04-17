@@ -736,10 +736,10 @@ aproba@^1.0.3, aproba@^1.1.1:
   resolved "https://registry.yarnpkg.com/aproba/-/aproba-1.2.0.tgz#6802e6264efd18c790a1b0d517f0f2627bf2c94a"
   integrity sha512-Y9J6ZjXtoYh8RnXVCMOU/ttDmk1aBjunq9vO0ta5x85WDQiQfUF9sIPBITdbiiIVcBo03Hi3jMxigBtsddlXRw==
 
-aqua-hooks@^0.2.0:
-  version "0.2.0"
-  resolved "https://registry.npm.taobao.org/aqua-hooks/download/aqua-hooks-0.2.0.tgz#28bccc7ca8404f0586c5c2d9cc23b001ddc635e1"
-  integrity sha1-KLzMfKhATwWGxcLZzCOwAd3GNeE=
+aqua-hooks@^0.5.0:
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/aqua-hooks/-/aqua-hooks-0.5.0.tgz#f93140b6fe2da159a0e4c6b3b7cd4a1b77071bc9"
+  integrity sha512-h/zMYXpcx1VcK/KykCJVlTLzgR7hT4/wMXUht18nLG6c3fiMrUzg9kFA0flBi4absxT3s5W5oV+3F3hhl3EEzg==
 
 are-we-there-yet@~1.1.2:
   version "1.1.5"
